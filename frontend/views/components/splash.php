@@ -2,7 +2,7 @@
     <canvas id="particle-canvas" class="absolute inset-0 w-full h-full"></canvas>
     <div class="relative z-10 flex flex-col items-center">
         <div class="animate-glow">
-            <img src="../src/imgs/LogoTransparent.png" alt="Logo" class="w-48 drop-shadow-lg">
+            <img src="src/imgs/LogoTransparent.png" alt="Logo" class="w-48 drop-shadow-lg">
         </div>
         <p class="text-white text-lg font-light tracking-widest mt-6 animate-fade-in-up-delay">Building the Future...</p>
     </div>

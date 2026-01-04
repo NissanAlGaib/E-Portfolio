@@ -5,7 +5,7 @@
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <!-- Projects Management -->
-            <a href="#" data-page="admin/manage_projects.php" class="ajax-link bg-glass border border-gray-700 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:border-blue-start">
+            <a href="?page=admin-projects" class="bg-glass border border-gray-700 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:border-blue-start">
                 <div class="flex items-center mb-4">
                     <div class="bg-gradient-to-r from-blue-start to-purple-end p-3 rounded-lg">
                         <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -18,7 +18,7 @@
             </a>
 
             <!-- Skills Management -->
-            <a href="#" data-page="admin/manage_skills.php" class="ajax-link bg-glass border border-gray-700 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:border-blue-start">
+            <a href="?page=admin-skills" class="bg-glass border border-gray-700 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:border-blue-start">
                 <div class="flex items-center mb-4">
                     <div class="bg-gradient-to-r from-blue-start to-purple-end p-3 rounded-lg">
                         <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -31,7 +31,7 @@
             </a>
 
             <!-- Hobbies Management -->
-            <a href="#" data-page="hobbies.php" class="ajax-link bg-glass border border-gray-700 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:border-blue-start">
+            <a href="?page=hobbies" class="bg-glass border border-gray-700 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:border-blue-start">
                 <div class="flex items-center mb-4">
                     <div class="bg-gradient-to-r from-blue-start to-purple-end p-3 rounded-lg">
                         <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -44,7 +44,7 @@
             </a>
 
             <!-- Achievements Management -->
-            <a href="#" data-page="admin/manage_achievements.php" class="ajax-link bg-glass border border-gray-700 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:border-blue-start">
+            <a href="?page=admin-achievements" class="bg-glass border border-gray-700 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:border-blue-start">
                 <div class="flex items-center mb-4">
                     <div class="bg-gradient-to-r from-blue-start to-purple-end p-3 rounded-lg">
                         <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -57,7 +57,7 @@
             </a>
 
             <!-- Education Management -->
-            <a href="#" data-page="admin/manage_education.php" class="ajax-link bg-glass border border-gray-700 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:border-blue-start">
+            <a href="?page=admin-education" class="bg-glass border border-gray-700 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:border-blue-start">
                 <div class="flex items-center mb-4">
                     <div class="bg-gradient-to-r from-blue-start to-purple-end p-3 rounded-lg">
                         <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">

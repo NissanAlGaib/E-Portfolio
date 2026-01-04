@@ -2,7 +2,7 @@
     <section class="max-w-7xl mx-auto p-12">
         <div class="flex justify-between items-center mb-8">
             <div>
-                <a href="#" data-page="admin/dashboard.php" class="ajax-link text-gray-400 hover:text-white mb-2 inline-block">← Back to Dashboard</a>
+                <a href="?page=admin" class="text-gray-400 hover:text-white mb-2 inline-block">← Back to Dashboard</a>
                 <h1 class="text-5xl font-black text-white">Contact Messages</h1>
             </div>
         </div>
@@ -19,8 +19,4 @@
         </div>
     </section>
 
-    <script src="../../src/js/admin/ManageContacts.js"></script>
-    <script>
-      loadContactsAdmin();
-    </script>
 </div>
