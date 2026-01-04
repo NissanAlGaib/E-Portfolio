@@ -1,19 +1,17 @@
 function loadHobbies() {
-  // Using dummy data for now to demonstrate the timeline functionality
-  const dummyData = [
-    { id: 1, hobby_name: 'Drawing', description: 'Exploring digital and traditional art.', category: '2020', proficiency: 80, icon: '1762995360_InBug-White.png' },
-    { id: 2, hobby_name: 'Creative Writing', description: 'Working on short stories and scripts.', category: '2020', proficiency: 75, icon: null },
-    { id: 3, hobby_name: 'Learning React', description: 'Building interactive web applications.', category: '2021', proficiency: 90, icon: null },
-    { id: 4, hobby_name: '3D Modeling', description: 'Creating assets in Blender.', category: '2022', proficiency: 60, icon: '1762995554_InBug-White.png' },
-    { id: 5, hobby_name: 'Game Development', description: 'Prototyping games in Unity.', category: '2022', proficiency: 70, icon: null },
-    { id: 6, hobby_name: 'Photography', description: 'Capturing moments and landscapes.', category: '2023', proficiency: 85, icon: null },
-  ];
-  renderHobbiesAsTimeline(dummyData);
-
-  // fetch("../../backend/api/hobbies_api.php?user_id=1")
-  //   .then((res) => res.json())
-  //   .then((data) => renderHobbiesAsTimeline(data))
-  //   .catch((err) => console.error("Error loading hobbies:", err));
+  fetch("../../backend/api/hobbies_api.php?user_id=1")
+    .then((res) => res.json())
+    .then((data) => {
+      if (data && !data.message) {
+        renderHobbiesAsTimeline(data);
+      } else {
+        renderHobbiesAsTimeline([]);
+      }
+    })
+    .catch((err) => {
+      console.error("Error loading hobbies:", err);
+      renderHobbiesAsTimeline([]);
+    });
 }
 
 function renderHobbiesAsTimeline(data) {

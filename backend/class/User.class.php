@@ -2,7 +2,7 @@
 class User
 {
     private $conn;
-    private $table_name = "user_profile";
+    private $table_name = "profile";
 
     public function __construct($db)
     {
