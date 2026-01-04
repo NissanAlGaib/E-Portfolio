@@ -1,8 +1,8 @@
-<div class="w-full h-full overflow-y-auto">
+<?php $page_title = 'Contact Messages'; include '_header.php'; ?>
     <section class="max-w-7xl mx-auto p-12">
         <div class="flex justify-between items-center mb-8">
             <div>
-                <a href="?page=admin" class="text-gray-400 hover:text-white mb-2 inline-block">← Back to Dashboard</a>
+                <a href="dashboard.php" class="text-gray-400 hover:text-white mb-2 inline-block">← Back to Dashboard</a>
                 <h1 class="text-5xl font-black text-white">Contact Messages</h1>
             </div>
         </div>
@@ -19,4 +19,8 @@
         </div>
     </section>
 
-</div>
+    <script src="../../src/js/admin/ManageContacts.js"></script>
+    <script>
+      loadContactsAdmin();
+    </script>
+<?php include '_footer.php'; ?>

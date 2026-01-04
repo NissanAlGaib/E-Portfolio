@@ -1,8 +1,8 @@
-<div class="w-full h-full overflow-y-auto">
+<?php $page_title = 'Manage Skills'; include '_header.php'; ?>
     <section class="max-w-7xl mx-auto p-12">
         <div class="flex justify-between items-center mb-8">
             <div>
-                <a href="?page=admin" class="text-gray-400 hover:text-white mb-2 inline-block">← Back to Dashboard</a>
+                <a href="dashboard.php" class="text-gray-400 hover:text-white mb-2 inline-block">← Back to Dashboard</a>
                 <h1 class="text-5xl font-black text-white">Manage Skills</h1>
             </div>
             <button onclick="openSkillModal()" class="bg-gradient-to-r from-blue-start to-purple-end text-white font-bold px-6 py-3 rounded-full shadow-lg transform hover:scale-105 transition-transform duration-300">
@@ -70,4 +70,8 @@
         </div>
     </section>
 
-</div>
+    <script src="../../src/js/admin/ManageSkills.js"></script>
+    <script>
+      loadSkillsAdmin();
+    </script>
+<?php include '_footer.php'; ?>
