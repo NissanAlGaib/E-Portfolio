@@ -1,50 +1,20 @@
-<?php
-require_once '../../../backend/auth/auth.php';
-requireLogin();
-?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard - E-Portfolio</title>
-    <link rel="stylesheet" href="../../src/output.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
-</head>
-<body class="bg-dark-bg text-white font-sans min-h-screen">
-    <!-- Admin Header -->
-    <header class="bg-glass border-b border-gray-700 backdrop-blur-lg sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
-            <div class="flex items-center space-x-4">
-                <h1 class="text-2xl font-bold bg-gradient-to-r from-blue-start to-purple-end bg-clip-text text-transparent">
-                    Admin Panel
-                </h1>
-            </div>
-            <div class="flex items-center space-x-4">
-                <a href="../pages/home.php" class="text-gray-400 hover:text-white text-sm transition-colors">
-                    View Portfolio
-                </a>
-                <span class="text-gray-400 text-sm">|</span>
-                <span class="text-gray-400 text-sm">
-                    <?php echo htmlspecialchars($_SESSION['admin_username']); ?>
-                </span>
-                <a href="logout.php" class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors text-sm font-medium">
-                    Logout
-                </a>
-            </div>
-        </div>
-    </header>
-
-    <div class="w-full overflow-y-auto">
+<?php $page_title = 'Admin Dashboard';
+include '_header.php'; ?>
+<div class="w-full h-full overflow-y-auto">
     <section class="max-w-7xl mx-auto p-12">
-        <h1 class="text-5xl font-black text-white mb-8 text-center">Admin Dashboard</h1>
-        <p class="text-gray-300 text-center mb-12">Manage your portfolio content</p>
+        <div class="flex justify-between items-center mb-8">
+            <div>
+                <h1 class="text-5xl font-black text-white">Admin Dashboard</h1>
+                <p class="text-gray-300 mt-2">Manage your portfolio content</p>
+            </div>
+            <a href="logout_handler.php" class="px-6 py-2 bg-red-500/80 hover:bg-red-600 text-white rounded-lg transition">
+                Logout
+            </a>
+        </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <!-- Projects Management -->
-            <a href="manage_projects.php" class="bg-glass border border-gray-700 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:border-blue-start">
+            <a href="/E-Portfolio/E-Portfolio/frontend/index.php?page=admin-projects" class="bg-glass border border-gray-700 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:border-blue-start">
                 <div class="flex items-center mb-4">
                     <div class="bg-gradient-to-r from-blue-start to-purple-end p-3 rounded-lg">
                         <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -57,7 +27,7 @@ requireLogin();
             </a>
 
             <!-- Skills Management -->
-            <a href="manage_skills.php" class="bg-glass border border-gray-700 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:border-blue-start">
+            <a href="/E-Portfolio/E-Portfolio/frontend/index.php?page=admin-skills" class="bg-glass border border-gray-700 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:border-blue-start">
                 <div class="flex items-center mb-4">
                     <div class="bg-gradient-to-r from-blue-start to-purple-end p-3 rounded-lg">
                         <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -70,7 +40,7 @@ requireLogin();
             </a>
 
             <!-- Achievements Management -->
-            <a href="manage_achievements.php" class="bg-glass border border-gray-700 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:border-blue-start">
+            <a href="/E-Portfolio/E-Portfolio/frontend/index.php?page=admin-achievements" class="bg-glass border border-gray-700 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:border-blue-start">
                 <div class="flex items-center mb-4">
                     <div class="bg-gradient-to-r from-blue-start to-purple-end p-3 rounded-lg">
                         <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -83,7 +53,7 @@ requireLogin();
             </a>
 
             <!-- Education Management -->
-            <a href="manage_education.php" class="bg-glass border border-gray-700 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:border-blue-start">
+            <a href="/E-Portfolio/E-Portfolio/frontend/index.php?page=admin-education" class="bg-glass border border-gray-700 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:border-blue-start">
                 <div class="flex items-center mb-4">
                     <div class="bg-gradient-to-r from-blue-start to-purple-end p-3 rounded-lg">
                         <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -97,7 +67,7 @@ requireLogin();
             </a>
 
             <!-- Contact Messages -->
-            <a href="manage_contacts.php" class="bg-glass border border-gray-700 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:border-blue-start">
+            <a href="/E-Portfolio/E-Portfolio/frontend/index.php?page=admin-contacts" class="bg-glass border border-gray-700 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:border-blue-start">
                 <div class="flex items-center mb-4">
                     <div class="bg-gradient-to-r from-blue-start to-purple-end p-3 rounded-lg">
                         <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -108,8 +78,34 @@ requireLogin();
                 </div>
                 <p class="text-gray-400">View and manage contact form submissions</p>
             </a>
+
+            <!-- Hobbies Management -->
+            <a href="/E-Portfolio/E-Portfolio/frontend/index.php?page=admin-hobbies" class="bg-glass border border-gray-700 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:border-blue-start">
+                <div class="flex items-center mb-4">
+                    <div class="bg-gradient-to-r from-blue-start to-purple-end p-3 rounded-lg">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-white ml-4">Hobbies</h3>
+                </div>
+                <p class="text-gray-400">Add and manage your hobbies with timeline</p>
+            </a>
+
+            <!-- Profile Management -->
+            <a href="/E-Portfolio/E-Portfolio/frontend/index.php?page=admin-profile" class="bg-glass border border-gray-700 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:border-blue-start">
+                <div class="flex items-center mb-4">
+                    <div class="bg-gradient-to-r from-blue-start to-purple-end p-3 rounded-lg">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-white ml-4">Profile</h3>
+                </div>
+                <p class="text-gray-400">Update your profile information and social links</p>
+            </a>
         </div>
     </section>
 </div>
-</body>
-</html>
+<?php include '_footer.php'; ?>
+</div>

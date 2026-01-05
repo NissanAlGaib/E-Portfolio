@@ -1,7 +1,7 @@
 <?php
 header("Content-Type: application/json");
 header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Methods: GET, POST");
+header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE");
 header("Access-Control-Allow-Headers: Content-Type");
 
 include "./Database.php";
@@ -48,27 +48,48 @@ switch ($method) {
         ];
 
         if (!$data["user_id"] || !$data["hobby_name"]) {
-            echo json_encode(["message" => "Missing required fields", "data" => $data]);
+            echo json_encode(["success" => false, "message" => "Missing required fields", "data" => $data]);
             exit();
         }
 
-        echo json_encode(["message" => $hobby->createHobby($data)
-            ? "Hobby added successfully"
-            : "Failed to add hobby"]);
+        $result = $hobby->createHobby($data);
+        echo json_encode([
+            "success" => $result,
+            "message" => $result ? "Hobby added successfully" : "Failed to add hobby"
+        ]);
         break;
 
     case "PUT":
         $input = json_decode(file_get_contents("php://input"), true);
-        echo json_encode(["message" => $hobby->updateHobby($input)
-            ? "Hobby updated successfully"
-            : "Failed to update hobby"]);
+        $result = $hobby->updateHobby($input);
+        echo json_encode([
+            "success" => $result,
+            "message" => $result ? "Hobby updated successfully" : "Failed to update hobby"
+        ]);
         break;
 
     case "DELETE":
-        parse_str(file_get_contents("php://input"), $data);
-        echo json_encode(["message" => $hobby->deleteHobby($data["id"])
-            ? "Hobby deleted successfully"
-            : "Failed to delete hobby"]);
+        // Check if ID is in query parameter first, then in request body
+        $id = $_GET["id"] ?? null;
+
+        if (!$id) {
+            parse_str(file_get_contents("php://input"), $data);
+            $id = $data["id"] ?? null;
+        }
+
+        if (!$id) {
+            echo json_encode([
+                "success" => false,
+                "message" => "Missing hobby ID"
+            ]);
+            exit();
+        }
+
+        $result = $hobby->deleteHobby($id);
+        echo json_encode([
+            "success" => $result,
+            "message" => $result ? "Hobby deleted successfully" : "Failed to delete hobby"
+        ]);
         break;
 
     default:

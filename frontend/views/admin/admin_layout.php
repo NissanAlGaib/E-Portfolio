@@ -1,9 +1,10 @@
 <?php
-require_once '../../../backend/auth/auth.php';
+require_once __DIR__ . '/../../../backend/auth/auth.php';
 requireLogin();
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,6 +14,7 @@ requireLogin();
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
 </head>
+
 <body class="bg-dark-bg text-white font-sans min-h-screen">
     <!-- Admin Header -->
     <header class="bg-glass border-b border-gray-700 backdrop-blur-lg sticky top-0 z-50">
@@ -38,7 +40,7 @@ requireLogin();
         <?php
         // Determine which page to load
         $page = $_GET['page'] ?? 'dashboard';
-        
+
         $allowed_pages = [
             'dashboard' => 'dashboard_content.php',
             'admin-projects' => 'manage_projects_content.php',
@@ -47,7 +49,7 @@ requireLogin();
             'admin-education' => 'manage_education_content.php',
             'admin-contacts' => 'manage_contacts_content.php',
         ];
-        
+
         if (isset($allowed_pages[$page]) && file_exists($allowed_pages[$page])) {
             include $allowed_pages[$page];
         } else {
@@ -58,4 +60,5 @@ requireLogin();
 
     <script src="../../src/js/main.js"></script>
 </body>
+
 </html>

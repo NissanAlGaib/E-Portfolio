@@ -1,22 +1,42 @@
 <?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
 // Get the page from URL parameter, default to 'home'
 $page = $_GET['page'] ?? 'home';
 
 // Define allowed pages to prevent directory traversal
 $allowedPages = [
     'home' => 'views/pages/home.php',
+    'profile' => 'views/pages/profile.php',
     'projects' => 'views/pages/projects.php',
     'skills' => 'views/pages/skills.php',
     'achievements' => 'views/pages/achievements.php',
     'education' => 'views/pages/education.php',
     'hobbies' => 'views/pages/hobbies.php',
+    'login' => 'views/pages/login.php',
+    'admin-login' => 'views/admin/login.php',
     'admin' => 'views/admin/dashboard.php',
     'admin-projects' => 'views/admin/manage_projects.php',
     'admin-skills' => 'views/admin/manage_skills.php',
     'admin-achievements' => 'views/admin/manage_achievements.php',
     'admin-education' => 'views/admin/manage_education.php',
     'admin-contacts' => 'views/admin/manage_contacts.php',
+    'admin-hobbies' => 'views/admin/manage_hobbies.php',
+    'admin-profile' => 'views/admin/manage_profile.php',
 ];
+
+// Check if admin authentication is required
+$adminPages = ['admin', 'admin-projects', 'admin-skills', 'admin-achievements', 'admin-education', 'admin-contacts', 'admin-hobbies', 'admin-profile'];
+if (in_array($page, $adminPages)) {
+    // Redirect to the admin page directly instead of including it
+    $adminFile = $allowedPages[$page] ?? null;
+    if ($adminFile && file_exists($adminFile)) {
+        include $adminFile;
+        exit();
+    }
+}
 
 // Get the content file path
 $contentFile = $allowedPages[$page] ?? $allowedPages['home'];
@@ -37,7 +57,7 @@ $contentFile = $allowedPages[$page] ?? $allowedPages['home'];
 <body class="bg-dark-bg text-white font-sans flex h-screen">
 
     <!-- Main Content Area -->
-    <main id="mainContent" class="flex-1 w-full backdrop-blur-sm flex justify-center items-center overflow-y-auto">
+    <main id="mainContent" class="flex-1 w-full backdrop-blur-sm flex justify-center items-center overflow-y-auto pb-32">
         <?php
         if (file_exists($contentFile)) {
             include $contentFile;
@@ -74,6 +94,8 @@ $contentFile = $allowedPages[$page] ?? $allowedPages['home'];
         echo '<script>if (typeof loadEducation === "function") loadEducation();</script>';
     } elseif ($page === 'home') {
         echo '<script>if (typeof loadUserData === "function") loadUserData();</script>';
+    } elseif ($page === 'profile') {
+        echo '<script>if (typeof loadProfileData === "function") loadProfileData();</script>';
     } elseif ($page === 'admin-projects') {
         echo '<script src="src/js/admin/ManageProjects.js"></script>';
         echo '<script>if (typeof loadProjectsAdmin === "function") loadProjectsAdmin();</script>';
@@ -89,6 +111,9 @@ $contentFile = $allowedPages[$page] ?? $allowedPages['home'];
     } elseif ($page === 'admin-contacts') {
         echo '<script src="src/js/admin/ManageContacts.js"></script>';
         echo '<script>if (typeof loadContactsAdmin === "function") loadContactsAdmin();</script>';
+    } elseif ($page === 'admin-hobbies') {
+        echo '<script src="src/js/admin/ManageHobbies.js"></script>';
+        echo '<script>if (typeof loadHobbiesAdmin === "function") loadHobbiesAdmin();</script>';
     }
     ?>
 </body>

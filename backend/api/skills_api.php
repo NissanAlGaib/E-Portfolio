@@ -50,27 +50,33 @@ switch ($method) {
         ];
 
         if (!$data["user_id"] || !$data["skill_name"]) {
-            echo json_encode(["message" => "Missing required fields"]);
+            echo json_encode(["success" => false, "message" => "Missing required fields"]);
             exit();
         }
 
-        echo json_encode(["message" => $skills->createSkill($data)
-            ? "Skill added successfully"
-            : "Failed to add skill"]);
+        $result = $skills->createSkill($data);
+        echo json_encode([
+            "success" => $result,
+            "message" => $result ? "Skill added successfully" : "Failed to add skill"
+        ]);
         break;
 
     case "PUT":
         $input = json_decode(file_get_contents("php://input"), true);
-        echo json_encode(["message" => $skills->updateSkill($input)
-            ? "Skill updated successfully"
-            : "Failed to update skill"]);
+        $result = $skills->updateSkill($input);
+        echo json_encode([
+            "success" => $result,
+            "message" => $result ? "Skill updated successfully" : "Failed to update skill"
+        ]);
         break;
 
     case "DELETE":
         parse_str(file_get_contents("php://input"), $data);
-        echo json_encode(["message" => $skills->deleteSkill($data["id"])
-            ? "Skill deleted successfully"
-            : "Failed to delete skill"]);
+        $result = $skills->deleteSkill($data["id"]);
+        echo json_encode([
+            "success" => $result,
+            "message" => $result ? "Skill deleted successfully" : "Failed to delete skill"
+        ]);
         break;
 
     default:

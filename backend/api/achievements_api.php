@@ -50,27 +50,33 @@ switch ($method) {
         ];
 
         if (!$data["user_id"] || !$data["title"]) {
-            echo json_encode(["message" => "Missing required fields"]);
+            echo json_encode(["success" => false, "message" => "Missing required fields"]);
             exit();
         }
 
-        echo json_encode(["message" => $achievements->createAchievement($data)
-            ? "Achievement added successfully"
-            : "Failed to add achievement"]);
+        $result = $achievements->createAchievement($data);
+        echo json_encode([
+            "success" => $result,
+            "message" => $result ? "Achievement added successfully" : "Failed to add achievement"
+        ]);
         break;
 
     case "PUT":
         $input = json_decode(file_get_contents("php://input"), true);
-        echo json_encode(["message" => $achievements->updateAchievement($input)
-            ? "Achievement updated successfully"
-            : "Failed to update achievement"]);
+        $result = $achievements->updateAchievement($input);
+        echo json_encode([
+            "success" => $result,
+            "message" => $result ? "Achievement updated successfully" : "Failed to update achievement"
+        ]);
         break;
 
     case "DELETE":
         parse_str(file_get_contents("php://input"), $data);
-        echo json_encode(["message" => $achievements->deleteAchievement($data["id"])
-            ? "Achievement deleted successfully"
-            : "Failed to delete achievement"]);
+        $result = $achievements->deleteAchievement($data["id"]);
+        echo json_encode([
+            "success" => $result,
+            "message" => $result ? "Achievement deleted successfully" : "Failed to delete achievement"
+        ]);
         break;
 
     default:

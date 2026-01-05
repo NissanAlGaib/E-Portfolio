@@ -90,21 +90,26 @@ function updateContactStatus(id, status) {
   })
     .then((res) => res.json())
     .then((res) => {
-      alert(res.message);
+      showAlert(res.message, res.success ? "success" : "error");
       loadContactsAdmin(currentFilter === "all" ? null : currentFilter);
     })
     .catch((err) => console.error("Error updating contact:", err));
 }
 
-function deleteContact(id) {
-  if (!confirm("Delete this contact message?")) return;
+async function deleteContact(id) {
+  const confirmed = await showConfirm(
+    "Are you sure you want to delete this contact message?",
+    "Delete",
+    "Cancel"
+  );
+  if (!confirmed) return;
   fetch("/E-Portfolio/E-Portfolio/backend/api/contacts_api.php", {
     method: "DELETE",
     body: `id=${id}`,
   })
     .then((res) => res.json())
     .then((res) => {
-      alert(res.message);
+      showAlert(res.message, res.success ? "success" : "error");
       loadContactsAdmin(currentFilter === "all" ? null : currentFilter);
     });
 }

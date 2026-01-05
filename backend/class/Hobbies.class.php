@@ -1,14 +1,17 @@
 <?php
-class Hobbies {
+class Hobbies
+{
     private $conn;
     private $table_name = "hobbies";
 
-    public function __construct($db) {
+    public function __construct($db)
+    {
         $this->conn = $db;
     }
 
     // Get all hobbies for a specific user
-    public function getHobbiesByUser($user_id) {
+    public function getHobbiesByUser($user_id)
+    {
         $query = "SELECT id, hobby_name, description, icon, category, proficiency
                   FROM " . $this->table_name . "
                   WHERE user_id = :user_id
@@ -21,7 +24,8 @@ class Hobbies {
     }
 
     // Add a new hobby
-    public function createHobby($data) {
+    public function createHobby($data)
+    {
         $query = "INSERT INTO " . $this->table_name . " 
                   (user_id, hobby_name, description, icon, category, proficiency)
                   VALUES (:user_id, :hobby_name, :description, :icon, :category, :proficiency)";
@@ -35,15 +39,21 @@ class Hobbies {
         return $stmt->execute();
     }
 
-    public function updateHobby($data) {
+    public function updateHobby($data)
+    {
         $query = "UPDATE " . $this->table_name . "
-                  SET hobby_name=:hobby_name, description=:description, category=:category, proficiency=:proficiency, icon=:icon
+                  SET hobby_name=:hobby_name, description=:description, category=:category
                   WHERE id=:id";
         $stmt = $this->conn->prepare($query);
-        return $stmt->execute($data);
+        $stmt->bindParam(":id", $data["id"]);
+        $stmt->bindParam(":hobby_name", $data["hobby_name"]);
+        $stmt->bindParam(":description", $data["description"]);
+        $stmt->bindParam(":category", $data["category"]);
+        return $stmt->execute();
     }
 
-    public function deleteHobby($id) {
+    public function deleteHobby($id)
+    {
         $query = "DELETE FROM " . $this->table_name . " WHERE id=:id";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(":id", $id);

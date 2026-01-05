@@ -52,27 +52,33 @@ switch ($method) {
         ];
 
         if (!$data["user_id"] || !$data["institution_name"] || !$data["degree"]) {
-            echo json_encode(["message" => "Missing required fields"]);
+            echo json_encode(["success" => false, "message" => "Missing required fields"]);
             exit();
         }
 
-        echo json_encode(["message" => $education->createEducation($data)
-            ? "Education added successfully"
-            : "Failed to add education"]);
+        $result = $education->createEducation($data);
+        echo json_encode([
+            "success" => $result,
+            "message" => $result ? "Education added successfully" : "Failed to add education"
+        ]);
         break;
 
     case "PUT":
         $input = json_decode(file_get_contents("php://input"), true);
-        echo json_encode(["message" => $education->updateEducation($input)
-            ? "Education updated successfully"
-            : "Failed to update education"]);
+        $result = $education->updateEducation($input);
+        echo json_encode([
+            "success" => $result,
+            "message" => $result ? "Education updated successfully" : "Failed to update education"
+        ]);
         break;
 
     case "DELETE":
         parse_str(file_get_contents("php://input"), $data);
-        echo json_encode(["message" => $education->deleteEducation($data["id"])
-            ? "Education deleted successfully"
-            : "Failed to delete education"]);
+        $result = $education->deleteEducation($data["id"]);
+        echo json_encode([
+            "success" => $result,
+            "message" => $result ? "Education deleted successfully" : "Failed to delete education"
+        ]);
         break;
 
     default:

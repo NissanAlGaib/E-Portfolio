@@ -55,27 +55,33 @@ switch ($method) {
         ];
 
         if (!$data["user_id"] || !$data["title"] || !$data["description"]) {
-            echo json_encode(["message" => "Missing required fields"]);
+            echo json_encode(["success" => false, "message" => "Missing required fields"]);
             exit();
         }
 
-        echo json_encode(["message" => $projects->createProject($data)
-            ? "Project added successfully"
-            : "Failed to add project"]);
+        $result = $projects->createProject($data);
+        echo json_encode([
+            "success" => $result,
+            "message" => $result ? "Project added successfully" : "Failed to add project"
+        ]);
         break;
 
     case "PUT":
         $input = json_decode(file_get_contents("php://input"), true);
-        echo json_encode(["message" => $projects->updateProject($input)
-            ? "Project updated successfully"
-            : "Failed to update project"]);
+        $result = $projects->updateProject($input);
+        echo json_encode([
+            "success" => $result,
+            "message" => $result ? "Project updated successfully" : "Failed to update project"
+        ]);
         break;
 
     case "DELETE":
         parse_str(file_get_contents("php://input"), $data);
-        echo json_encode(["message" => $projects->deleteProject($data["id"])
-            ? "Project deleted successfully"
-            : "Failed to delete project"]);
+        $result = $projects->deleteProject($data["id"]);
+        echo json_encode([
+            "success" => $result,
+            "message" => $result ? "Project deleted successfully" : "Failed to delete project"
+        ]);
         break;
 
     default:

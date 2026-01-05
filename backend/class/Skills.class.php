@@ -1,14 +1,17 @@
 <?php
-class Skills {
+class Skills
+{
     private $conn;
     private $table_name = "skills";
 
-    public function __construct($db) {
+    public function __construct($db)
+    {
         $this->conn = $db;
     }
 
     // Get all skills for a specific user
-    public function getSkillsByUser($user_id) {
+    public function getSkillsByUser($user_id)
+    {
         $query = "SELECT id, skill_name, skill_type, category, proficiency, years_experience, description, icon
                   FROM " . $this->table_name . "
                   WHERE user_id = :user_id
@@ -21,7 +24,8 @@ class Skills {
     }
 
     // Add a new skill
-    public function createSkill($data) {
+    public function createSkill($data)
+    {
         $query = "INSERT INTO " . $this->table_name . " 
                   (user_id, skill_name, skill_type, category, proficiency, years_experience, description, icon)
                   VALUES (:user_id, :skill_name, :skill_type, :category, :proficiency, :years_experience, :description, :icon)";
@@ -37,17 +41,26 @@ class Skills {
         return $stmt->execute();
     }
 
-    public function updateSkill($data) {
+    public function updateSkill($data)
+    {
         $query = "UPDATE " . $this->table_name . "
                   SET skill_name=:skill_name, skill_type=:skill_type, category=:category, 
                       proficiency=:proficiency, years_experience=:years_experience, 
-                      description=:description, icon=:icon
+                      description=:description
                   WHERE id=:id";
         $stmt = $this->conn->prepare($query);
-        return $stmt->execute($data);
+        $stmt->bindParam(":id", $data["id"]);
+        $stmt->bindParam(":skill_name", $data["skill_name"]);
+        $stmt->bindParam(":skill_type", $data["skill_type"]);
+        $stmt->bindParam(":category", $data["category"]);
+        $stmt->bindParam(":proficiency", $data["proficiency"]);
+        $stmt->bindParam(":years_experience", $data["years_experience"]);
+        $stmt->bindParam(":description", $data["description"]);
+        return $stmt->execute();
     }
 
-    public function deleteSkill($id) {
+    public function deleteSkill($id)
+    {
         $query = "DELETE FROM " . $this->table_name . " WHERE id=:id";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(":id", $id);
