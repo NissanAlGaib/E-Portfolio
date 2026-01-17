@@ -1,5 +1,5 @@
 function loadUserData() {
-  fetch("../../backend/api/user_api.php")
+  fetch("/E-Portfolio/E-Portfolio/backend/api/user_api.php")
     .then((response) => {
       if (!response.ok) throw new Error("Network response was not OK");
       return response.json();
